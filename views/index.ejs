@@ -1,0 +1,114 @@
+<%- include('./partials/navbar') %>
+<%- include('./layouts/boilerplate') %>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Left Sidebar -->
+            <div class="col-md-3">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Left Sidebar</h5>
+                        <p class="card-text">Content for the left sidebar.</p>
+                    </div>
+                </div>
+                <!-- Quotes section -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Career Change Quotes</h5>
+                        <div id="quotes">Loading quotes...</div>
+                    </div>
+                </div>
+                <!-- Other left sidebar components -->
+            </div>
+
+            <!-- Blog Posts -->
+            <div class="col-md-6">
+                <% posts.forEach(function(post, index) { %>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h2 class="card-title"><%= post.title %></h2>
+                            <p class="card-text"><%= post.content %></p>
+                            <a href="#" class="btn btn-primary">Read more</a>
+                            <form action="/delete/<%= post._id %>?_method=DELETE" method="POST">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                <% }); %>
+                <a href="/new" class="btn btn-secondary">Create New Post</a>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="col-md-3">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Right Sidebar</h5>
+                        <p class="card-text">Content for the right sidebar.</p>
+                    </div>
+                </div>
+                <!-- Other right sidebar components -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+            integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+            crossorigin="anonymous"></script>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const quotes = [
+            "The only way to do great work is to love what you do. — Steve Jobs",
+            "Your work is going to fill a large part of your life, and the only way to be truly satisfied is to do what you believe is great work. — Steve Jobs",
+            "The best way to predict the future is to create it. — Peter Drucker",
+            "Opportunities don't happen, you create them. — Chris Grosser",
+            "I find that the harder I work, the more luck I seem to have. — Thomas Jefferson",
+            "Success is not the key to happiness. Happiness is the key to success. If you love what you are doing, you will be successful. — Albert Schweitzer",
+            "Choose a job you love, and you will never have to work a day in your life. — Confucius",
+            "The only limit to our realization of tomorrow is our doubts of today. — Franklin D. Roosevelt",
+            "Do what you love, and the money will follow. — Marsha Sinetar",
+            "The future depends on what you do today. — Mahatma Gandhi",
+            "Dream big and dare to fail. — Norman Vaughan",
+            "In the end, it's not the years in your life that count. It's the life in your years. — Abraham Lincoln",
+            "Don't watch the clock; do what it does. Keep going. — Sam Levenson",
+            "The only person you are destined to become is the person you decide to be. — Ralph Waldo Emerson",
+            "Success usually comes to those who are too busy to be looking for it. — Henry David Thoreau",
+            "You miss 100% of the shots you don’t take. — Wayne Gretzky",
+            "Whether you think you can or you think you can’t, you’re right. — Henry Ford",
+            "Act as if what you do makes a difference. It does. — William James",
+            "The best revenge is massive success. — Frank Sinatra",
+            "Hardships often prepare ordinary people for an extraordinary destiny. — C.S. Lewis"
+        ];
+
+        function getRandomQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            return quotes[randomIndex];
+        }
+
+        const quotesContainer = document.getElementById('quotes');
+        quotesContainer.textContent = getRandomQuote();
+    });
+    </script>
+    
+    <style>
+    .quote {
+        margin-bottom: 1em;
+    }
+    .quote p {
+        font-style: italic;
+    }
+    .quote footer {
+        text-align: right;
+        font-weight: bold;
+    }
+    </style>
+</body>

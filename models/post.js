@@ -4,10 +4,14 @@ const Schema = mongoose.Schema;
 // const User = require('./user'); //import the user model
 
 const postSchema = new Schema ({
-    title: String,
-    content: String,
-    image: String
-    // comments: [{ type: Schema.Types.ObjectId, ref: 'Comment', default: [] }] //use objectId type referencing Comment model
+    title: {
+        type: String,
+        required: true
+    },
+    content: {
+        type: String,
+        required: true
+    }
 });
 
 module.exports = mongoose.model("Post", postSchema);
